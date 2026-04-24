@@ -1,14 +1,25 @@
-import Fruits from "./Fruits";
-import FruitsCounter from "./FruitsCounter";
+import "./App.css";
+import Homepage from "./Homepage";
+import Contact from "./Contact.js"
+import AboutLittleLemon from "./AboutLittleLemon";
+import { Routes, Route, Link } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Where should the state go?</h1>
-      <Fruits />
-      <FruitsCounter />
+    <div> 
+	  <nav>
+      <Link to="/" className="nav-item">Homepage</Link>
+      <Link to="/about" className="nav-item">About Little Lemon</Link>
+      <Link to="/contact" className="nav-item">Contact</Link>
+	  </nav>
+      <Routes> 
+        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/about" element={<AboutLittleLemon />}></Route>
+        <Route path="/contact" element={<Contact />} /><Route></Route>
+      </Routes>
     </div>
   );
-}
+};
 
-export default App;
+export default App
