@@ -1,25 +1,68 @@
+import {
+  useState,
+  useRef
+} from "react"; 
 import "./App.css";
-import Homepage from "./Homepage";
-import Contact from "./Contact.js"
-import AboutLittleLemon from "./AboutLittleLemon";
-import { Routes, Route, Link } from "react-router-dom";
 
-
-function App() {
-  return (
-    <div> 
-	  <nav>
-      <Link to="/" className="nav-item">Homepage</Link>
-      <Link to="/about" className="nav-item">About Little Lemon</Link>
-      <Link to="/contact" className="nav-item">Contact</Link>
-	  </nav>
-      <Routes> 
-        <Route path="/" element={<Homepage />}></Route>
-        <Route path="/about" element={<AboutLittleLemon />}></Route>
-        <Route path="/contact" element={<Contact />} /><Route></Route>
-      </Routes>
-    </div>
-  );
-};
-
-export default App
+function App() { 
+  const inputRef = useRef(null); 
+  const resultRef = useRef(null); 
+  const [result, setResult] = useState(0); 
+ 
+  function plus(e) { 
+    e.preventDefault(); 
+    setResult((result) => result + Number(inputRef.current.value)); 
+  }; 
+ 
+  function minus(e) { 
+  	e.preventDefault();
+    setResult((result) => result - Number(inputRef.current.value))
+  };
+ 
+  function times(e) { 
+    e.preventDefault();
+    setResult((result) => result * Number(inputRef.current.value))
+  }; 
+ 
+  function divide(e) { 
+    e.preventDefault();
+    setResult((result) => result / Number(inputRef.current.value))
+  };
+ 
+  function resetInput(e) { 
+    e.preventDefault();
+    inputRef.current.value = "";
+  }; 
+ 
+  function resetResult(e) { 
+  	e.preventDefault();
+    setResult((result) => 0);
+  }; 
+ 
+  return ( 
+    <div className="App"> 
+      <div> 
+        <h1>Simplest Working Calculator</h1> 
+      </div> 
+      <form> 
+        <p ref={resultRef}> 
+          {result} 
+        </p> 
+        <input
+          pattern="[0-9]" 
+          ref={inputRef} 
+          type="number" 
+          placeholder="Type a number" 
+        /> 
+        <button onClick={plus}>add</button> 
+        <button onclick={minus}>subtract</button>
+        <button onClick={times}>multiply</button> 
+        <button onClick={divide}>divide</button> 
+        <button onClick={resetInput}>clear</button> 
+        <button onClick={resetResult}>clear all</button> 
+      </form> 
+    </div> 
+  ); 
+} 
+ 
+export default App; 
